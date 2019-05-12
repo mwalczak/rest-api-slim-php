@@ -49,7 +49,7 @@ abstract class BaseController
             'message' => $message,
         ];
 
-        $this->container->get('logger')->info("jsonResponse $result: ".print_r($result, true));
+        $this->container->get('logger')->info("jsonResponse $result: ".json_encode($result));
 
         return $this->response->withJson($result, $code, JSON_PRETTY_PRINT);
     }
@@ -60,7 +60,7 @@ abstract class BaseController
     protected function getInput()
     {
         $body = $this->request->getParsedBody();
-        $this->container->get('logger')->info("getInput body: ".print_r($body, true));
+        $this->container->get('logger')->info("getInput body: ".json_encode($body));
 
         return $body;
     }
