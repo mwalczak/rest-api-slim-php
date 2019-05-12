@@ -16,6 +16,7 @@ final class ApiError extends \Slim\Handlers\Error
             'class' => $className->getShortName(),
             'status' => 'error',
             'code' => $statusCode,
+            'details' => $exception->getTraceAsString(),
         ];
         $body = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);
 

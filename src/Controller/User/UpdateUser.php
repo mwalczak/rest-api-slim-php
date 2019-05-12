@@ -17,6 +17,6 @@ class UpdateUser extends BaseUser
             $this->saveInCache((int) $this->args['id'], $user);
         }
 
-        return $this->jsonResponse('success', $user, 200);
+        return $this->response('success', $user, 200);
     }
 }

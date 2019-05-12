@@ -16,6 +16,6 @@ class CreateNote extends BaseNote
             $this->saveInCache((int) $note->id, $note);
         }
 
-        return $this->jsonResponse('success', $note, 201);
+        return $this->response('success', $note, 201);
     }
 }

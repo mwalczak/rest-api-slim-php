@@ -16,6 +16,6 @@ class UpdateNote extends BaseNote
             $this->saveInCache((int) $this->args['id'], $note);
         }
 
-        return $this->jsonResponse('success', $note, 200);
+        return $this->response('success', $note, 200);
     }
 }

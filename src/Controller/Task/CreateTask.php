@@ -13,6 +13,6 @@ class CreateTask extends BaseTask
         $input = $this->getInput();
         $task = $this->getTaskService()->createTask($input);
 
-        return $this->jsonResponse('success', $task, 201);
+        return $this->response('success', $task, 201);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Spatie\ArrayToXml\ArrayToXml;
 
 abstract class BaseController
 {
@@ -41,7 +42,7 @@ abstract class BaseController
      * @param int $code
      * @return Response
      */
-    protected function jsonResponse(string $status, $message, int $code):  Response
+    protected function response(string $status, $message, int $code): Response
     {
         $result = [
             'code' => $code,
@@ -49,9 +50,27 @@ abstract class BaseController
             'message' => $message,
         ];
 
-        $this->container->get('logger')->info("jsonResponse $result: ".json_encode($result));
+        $acceptHeader = $this->request->getHeader('Accept');
+        $this->container->get('logger')->info("response $result: " . json_encode($result));
+        if (preg_match("/(javascript|json)$/", $acceptHeader[0])) {
+            return $this->response->withJson($result, $code, JSON_PRETTY_PRINT);
+        } else {
+            $resArr = [];
+            foreach ($message as $key => $value) {
+                if (preg_match("/^\d*$/", $key)) {
+                    $resArr['item'][] = $value;
+                } else {
+                    $resArr[$key] = $value;
+                }
+            }
+            $result = ArrayToXml::convert($resArr);
 
-        return $this->response->withJson($result, $code, JSON_PRETTY_PRINT);
+            $xmlResponse = $this->response
+                ->withStatus($code)
+                ->withHeader('Content-Type', 'text/xml');
+            $xmlResponse->getBody()->write($result);
+            return $xmlResponse;
+        }
     }
 
     /**

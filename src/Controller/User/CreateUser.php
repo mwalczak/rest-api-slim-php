@@ -16,6 +16,6 @@ class CreateUser extends BaseUser
             $this->saveInCache((int) $user->id, $user);
         }
 
-        return $this->jsonResponse('success', $user, 201);
+        return $this->response('success', $user, 201);
     }
 }

@@ -32,7 +32,7 @@ class DefaultController extends BaseController
             'timestamp' => time(),
         ];
 
-        return $this->jsonResponse('success', $message, 200);
+        return $this->response('success', $message, 200);
     }
 
     public function getStatus(Request $request, Response $response, array $args): Response
@@ -50,6 +50,6 @@ class DefaultController extends BaseController
             'timestamp' => time(),
         ];
 
-        return $this->jsonResponse('success', $status, 200);
+        return $this->response('success', $status, 200);
     }
 }

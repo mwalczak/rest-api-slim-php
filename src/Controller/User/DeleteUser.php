@@ -16,6 +16,6 @@ class DeleteUser extends BaseUser
             $this->deleteFromCache((int) $this->args['id']);
         }
 
-        return $this->jsonResponse('success', $user, 204);
+        return $this->response('success', $user, 204);
     }
 }

@@ -12,6 +12,6 @@ class SearchUsers extends BaseUser
         $this->setParams($request, $response, $args);
         $users = $this->getUserService()->searchUsers($this->args['query']);
 
-        return $this->jsonResponse('success', $users, 200);
+        return $this->response('success', $users, 200);
     }
 }

@@ -16,7 +16,7 @@ class GetOneUser extends BaseUser
             $user = $this->getUserService()->getUser((int) $this->args['id']);
         }
 
-        return $this->jsonResponse('success', $user, 200);
+        return $this->response('success', $user, 200);
     }
 
     /**
