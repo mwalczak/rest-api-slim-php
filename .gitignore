@@ -1,6 +1,6 @@
 /vendor/
 /logs/*
-!/logs/README.md
+!/logs/.git_keep
 /coverage/
 *.php_cs.cache
 /nbproject/

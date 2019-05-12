@@ -49,6 +49,8 @@ abstract class BaseController
             'message' => $message,
         ];
 
+        $this->container->get('logger')->info("jsonResponse $result: ".print_r($result, true));
+
         return $this->response->withJson($result, $code, JSON_PRETTY_PRINT);
     }
 
@@ -57,7 +59,10 @@ abstract class BaseController
      */
     protected function getInput()
     {
-        return $this->request->getParsedBody();
+        $body = $this->request->getParsedBody();
+        $this->container->get('logger')->info("getInput body: ".print_r($body, true));
+
+        return $body;
     }
 
     protected function getRedisClient(): \Predis\Client
